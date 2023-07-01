@@ -1,0 +1,31 @@
+import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
+
+# Sample input features (house size and number of rooms)
+X = np.array([[1000, 2], [1500, 3], [1200, 2], [1700, 4], [2000, 3]])
+
+# Corresponding target values (house prices)
+y = np.array([300000, 450000, 350000, 500000, 550000])
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Create a linear regression model
+model = LinearRegression()
+
+# Train the model
+model.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred = model.predict(X_test)
+
+# Calculate the root mean squared error (RMSE)
+rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+print("Root Mean Squared Error:", rmse)
+
+# Predict house prices for new data
+new_data = np.array([[1300, 2], [1800, 3]])
+new_predictions = model.predict(new_data)
+print("Predictions for new data:"), new_predictions
